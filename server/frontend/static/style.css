@@ -3,6 +3,16 @@ img{
   align-self: center;
 }
 
+.contact-container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+
 .card{
   border: rgb(103, 102, 105) 3px solid;
   display: flex;  
