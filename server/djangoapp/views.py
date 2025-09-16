@@ -6,7 +6,7 @@ import json
 
 from .restapis import get_request, analyze_review_sentiments, post_review
 from .models import CarMake, CarModel
-# from .populate import initiate
+from .populate import initiate  # ✅ Un-commented to fix F821
 
 logger = logging.getLogger(__name__)
 
@@ -62,7 +62,10 @@ def add_review(request):
             post_review(data)
             return JsonResponse({"status": 200})
         except Exception:
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+            return JsonResponse({
+                "status": 401,
+                "message": "Error in posting review"
+            })
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
 
@@ -71,7 +74,7 @@ def get_cars(request):
     count = CarMake.objects.count()
     print(count)
     if count == 0:
-        initiate()  # Only works if 'initiate' is uncommented
+        initiate()  # ✅ Will work now since import is fixed
     car_models = CarModel.objects.select_related('car_make')
     cars = []
     for car_model in car_models:
