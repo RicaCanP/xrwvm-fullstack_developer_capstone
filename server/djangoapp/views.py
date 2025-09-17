@@ -4,6 +4,15 @@ from django.views.decorators.csrf import csrf_exempt
 import logging
 import json
 
+
+from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth import logout
+from django.contrib import messages
+from datetime import datetime
+
 from .restapis import get_request, analyze_review_sentiments, post_review
 from .models import CarMake, CarModel
 from .populate import initiate  # ✅ Un-commented to fix F821
@@ -24,7 +33,7 @@ def login_user(request):
     return JsonResponse(data)
 
 @csrf_exempt
-def logout(request):
+def logout_user(request):
     logout(request) # Terminate user session
     data = {"userName":""} # Return empty username
     return JsonResponse(data)
